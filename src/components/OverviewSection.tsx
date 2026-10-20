@@ -1,77 +1,67 @@
 import React from 'react';
 
+// Live stats are hidden until epochs launch
+const STAT_LABELS = ['Total Silver Pool', 'Active Predictions', 'Current Crown Lead', 'Active Chambers'];
+
 export const OverviewSection: React.FC = () => {
   return (
-    <section className="mb-12 text-center relative overflow-hidden rounded-2xl bg-cambria-900/70 backdrop-blur-md p-8 sm:p-12 royal-border shadow-2xl transition-all">
+    <section className="mb-10 text-center relative overflow-hidden rounded-2xl bg-cambria-900/70 backdrop-blur-md p-8 sm:p-12 royal-border shadow-2xl transition-all">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.12)_0%,transparent_75%)] pointer-events-none" />
 
       {/* Live Round Badge & Timer */}
       <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs font-semibold mb-6 shadow-md backdrop-blur-sm tracking-wide">
         <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping inline-block"></span>
         <i className="fa-regular fa-clock text-amber-400"></i>
-        <span>FIRST EPOCH ROUND LIVE SOON</span>
+        <span>EPOCH ROUNDS GO LIVE AT LAUNCH</span>
       </div>
 
       {/* Header Titles */}
-      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-medieval mb-3 drop-shadow-md">
-        Cambria Genesis <span className="gold-gradient-text">Prediction</span>
+      <h1 className="mb-3">
+        <img
+          src="/images/cambria_genesis_mmp_logo.png"
+          alt="Cambria Genesis Multi-Market Prediction"
+          className="mx-auto w-full max-w-[260px] sm:max-w-[360px] lg:max-w-[420px] h-auto drop-shadow-[0_6px_14px_rgba(0,0,0,0.75)] select-none"
+          draggable={false}
+        />
       </h1>
-      <p className="text-lg sm:text-2xl font-semibold text-amber-200/90 mb-4 font-medieval tracking-wide drop-shadow uppercase">
-        8 FACTION, ONE ROYALTY
+      <p className="text-sm sm:text-lg font-semibold text-amber-200/90 mb-6 font-medieval tracking-widest drop-shadow uppercase">
+        8 NOBLE HOUSES • 7 REGIONAL CITIES • FREEBORN DISRUPTION
       </p>
-      {/* Slogan Bullet Pointed Order */}
-      <div className="max-w-2xl mx-auto mb-8 bg-cambria-950/70 border border-cambria-800 rounded-xl p-5 sm:p-6 backdrop-blur-md shadow-inner text-left">
-        <ul className="space-y-3 sm:space-y-3.5">
-          <li className="flex items-start space-x-3 text-xs sm:text-sm font-semibold text-gray-200 tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-            <span>CHOOSE WHICH OF THE 8 NOBLE HOUSE WILL BE RENOUNCED AS ROYALTY .</span>
-          </li>
-          <li className="flex items-start space-x-3 text-xs sm:text-sm font-semibold text-gray-200 tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-            <span>SUBMIT YOUR DESIRED SILVER AMOUNT TO BURN.</span>
-          </li>
-          <li className="flex items-start space-x-3 text-xs sm:text-sm font-semibold text-gray-200 tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-            <span>YOU CAN SUBMIT PREDICTION TO EITHER BACK YOUR OWN HOUSE OR OTHER FACTIONS</span>
-          </li>
-          <li className="flex items-start space-x-3 text-xs sm:text-sm font-semibold text-gray-200 tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span>
-            <span>YOUR BURNED SILVER WILL TURN INTO A SHARE FROM THE PRIZE POOL AT THE END OF AN EPOCH.</span>
-          </li>
-        </ul>
+
+      {/* Concept A Architecture Overview */}
+      <div className="max-w-3xl mx-auto mb-8 bg-cambria-950/70 border border-cambria-800 rounded-xl p-5 sm:p-6 backdrop-blur-md shadow-inner text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="p-3 rounded-lg bg-cambria-900/60 border border-amber-500/30">
+            <span className="text-amber-400 font-bold block mb-1">CHAMBER I: CROWN SEAT</span>
+            <p className="text-gray-300 text-[11px] leading-relaxed">
+              Main market: predict which of the 8 Noble Houses claims the Crown Throne in Capital City.
+            </p>
+          </div>
+          <div className="p-3 rounded-lg bg-cambria-900/60 border border-cyan-500/30">
+            <span className="text-cyan-400 font-bold block mb-1">CHAMBER II: TURF WARS</span>
+            <p className="text-gray-300 text-[11px] leading-relaxed">
+              7 concurrent sub-markets for Dreadfort, Thorin&apos;s Peak, Mirewick, and regional city offices.
+            </p>
+          </div>
+          <div className="p-3 rounded-lg bg-cambria-900/60 border border-rose-500/30">
+            <span className="text-rose-400 font-bold block mb-1">CHAMBER III: FREEBORN</span>
+            <p className="text-gray-300 text-[11px] leading-relaxed">
+              High-multiplier upset pool: wager if unaligned Freeborn settlers strip power from nobility.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Quick Stats Bar */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto bg-cambria-950/75 p-4 rounded-xl border border-cambria-700/70 text-left backdrop-blur-md shadow-lg">
-        <div>
-          <span className="text-xs text-gray-400 block mb-1">Total Silver Burned</span>
-          <span className="text-lg sm:text-xl font-bold text-amber-400 font-mono flex items-center space-x-1.5">
-            <i className="fa-solid fa-fire text-amber-500 text-sm"></i>
-            <span>0</span>
-          </span>
-        </div>
-        <div>
-          <span className="text-xs text-gray-400 block mb-1">Active Predictors</span>
-          <span className="text-lg sm:text-xl font-bold text-white font-mono flex items-center space-x-1.5">
-            <i className="fa-solid fa-users text-blue-400 text-sm"></i>
-            <span>0</span>
-          </span>
-        </div>
-        <div>
-          <span className="text-xs text-gray-400 block mb-1">Current House Royalty Holder</span>
-          <div className="flex items-center space-x-2 mt-1">
-            <span className="text-sm sm:text-base font-bold text-gray-400 font-mono italic">
-              No History
+        {STAT_LABELS.map((label) => (
+          <div key={label}>
+            <span className="text-xs text-gray-400 block mb-1">{label}</span>
+            <span className="text-[11px] sm:text-xs font-bold text-amber-400/90 font-mono uppercase tracking-wide leading-snug block">
+              Available on live epochs
             </span>
           </div>
-        </div>
-        <div>
-          <span className="text-xs text-gray-400 block mb-1">Reward Pool Format</span>
-          <span className="text-base sm:text-lg font-bold text-amber-400 font-mono flex items-center space-x-1.5 mt-0.5">
-            <i className="fa-solid fa-gem text-amber-400 text-xs"></i>
-            <span>TBD</span>
-          </span>
-        </div>
+        ))}
       </div>
     </section>
   );

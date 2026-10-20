@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useWallet } from '@/context/WalletContext';
+import { useBuffer } from '@/context/BufferContext';
 
 interface SilverBurnPanelProps {
   houseId: string;
@@ -8,6 +9,7 @@ interface SilverBurnPanelProps {
 
 export const SilverBurnPanel: React.FC<SilverBurnPanelProps> = ({ houseId, houseName }) => {
   const { userSilverBalance, userPrediction, submitPrediction, showToast } = useWallet();
+  const { triggerBuffer } = useBuffer();
   const [burnAmount, setBurnAmount] = useState<number | ''>('');
   const [agreedToTerms, setAgreedToTerms] = useState<boolean>(false);
 
@@ -20,7 +22,7 @@ export const SilverBurnPanel: React.FC<SilverBurnPanelProps> = ({ houseId, house
   const isAlreadyPredicted = Boolean(userPrediction);
   const isThisHousePredicted = userPrediction?.houseId === houseId;
 
-  const handleBurn = () => {
+  const handleBurn = async () => {
     if (!agreedToTerms) {
       showToast('You must agree to the Terms of Service before confirming your burn.', 'error');
       return;
@@ -31,6 +33,7 @@ export const SilverBurnPanel: React.FC<SilverBurnPanelProps> = ({ houseId, house
       return;
     }
 
+    await triggerBuffer(450, `Submitting ${Number(burnAmount).toLocaleString()} Silver pledge for House ${houseName}...`);
     submitPrediction(houseId, Number(burnAmount));
   };
 

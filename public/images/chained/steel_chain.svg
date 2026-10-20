@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="32" viewBox="0 0 120 32">
+  <!--
+    Seamless vertical tile of two steel chain strands, aligned with the
+    banner mounting brackets (x = 28.5 and x = 88.5 in the 120px banner art).
+    One tile = one face-on link (split across the tile edge) + one edge-on link.
+    Link: 13 x 24 outer, 4u rod thickness, 16u pitch.
+  -->
+  <defs>
+    <!-- Face-on link: each side rod is a lit cylinder, light from the upper left -->
+    <linearGradient id="faceRods" gradientUnits="userSpaceOnUse" x1="-6.5" y1="0" x2="6.5" y2="0">
+      <stop offset="0" stop-color="#262b31"/>
+      <stop offset="0.07" stop-color="#7d8792"/>
+      <stop offset="0.15" stop-color="#f2f5f8"/>
+      <stop offset="0.23" stop-color="#a3acb6"/>
+      <stop offset="0.31" stop-color="#3a4149"/>
+      <stop offset="0.5" stop-color="#58616b"/>
+      <stop offset="0.69" stop-color="#2c3238"/>
+      <stop offset="0.79" stop-color="#7f8994"/>
+      <stop offset="0.86" stop-color="#c4ccd5"/>
+      <stop offset="0.93" stop-color="#5a636d"/>
+      <stop offset="1" stop-color="#1c2025"/>
+    </linearGradient>
+    <!-- Top bar catches light, bottom bar falls into shadow -->
+    <linearGradient id="faceEnds" gradientUnits="userSpaceOnUse" x1="0" y1="-12" x2="0" y2="12">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.15"/>
+      <stop offset="0.05" stop-color="#fff" stop-opacity="0.55"/>
+      <stop offset="0.13" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="0.2" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.8" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.9" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.6"/>
+    </linearGradient>
+    <!-- Edge-on link: a single rod seen side-on -->
+    <linearGradient id="edgeRod" gradientUnits="userSpaceOnUse" x1="-2.4" y1="0" x2="2.4" y2="0">
+      <stop offset="0" stop-color="#20252a"/>
+      <stop offset="0.18" stop-color="#8b95a0"/>
+      <stop offset="0.36" stop-color="#eef2f6"/>
+      <stop offset="0.55" stop-color="#9aa3ad"/>
+      <stop offset="0.82" stop-color="#4b535c"/>
+      <stop offset="1" stop-color="#1a1e22"/>
+    </linearGradient>
+    <linearGradient id="edgeEnds" gradientUnits="userSpaceOnUse" x1="0" y1="-12" x2="0" y2="12">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.45"/>
+      <stop offset="0.12" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.82" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
+    </linearGradient>
+
+    <g id="faceLink">
+      <rect x="-4.5" y="-10" width="9" height="20" rx="4.5" fill="none" stroke="#0f1114" stroke-width="5.4"/>
+      <rect x="-4.5" y="-10" width="9" height="20" rx="4.5" fill="none" stroke="url(#faceRods)" stroke-width="4"/>
+      <rect x="-4.5" y="-10" width="9" height="20" rx="4.5" fill="none" stroke="url(#faceEnds)" stroke-width="4"/>
+      <!-- specular glint on the upper-left curve -->
+      <path d="M -4.6 -3 L -4.6 -6.5 A 3.2 3.2 0 0 1 -2.6 -9.6" fill="none" stroke="#fff" stroke-opacity="0.75" stroke-width="0.7" stroke-linecap="round"/>
+    </g>
+
+    <g id="edgeLink">
+      <!-- contact shadow cast onto the face links it threads through -->
+      <rect x="-1.6" y="-11" width="4.4" height="24" rx="2.2" fill="#000" fill-opacity="0.45"/>
+      <rect x="-2.2" y="-12" width="4.4" height="24" rx="2.2" fill="url(#edgeRod)" stroke="#0f1114" stroke-width="0.7"/>
+      <rect x="-2.2" y="-12" width="4.4" height="24" rx="2.2" fill="url(#edgeEnds)"/>
+      <path d="M -0.7 -9.5 L -0.7 7" stroke="#fff" stroke-opacity="0.5" stroke-width="0.5" stroke-linecap="round"/>
+    </g>
+
+    <g id="strand">
+      <use href="#faceLink" y="0"/>
+      <use href="#faceLink" y="32"/>
+      <use href="#edgeLink" y="16"/>
+    </g>
+  </defs>
+
+  <use href="#strand" x="28.5"/>
+  <use href="#strand" x="88.5"/>
+</svg>

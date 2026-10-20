@@ -54,15 +54,15 @@ export const HouseModal: React.FC = () => {
             <div className="text-center sm:text-left flex-grow">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
                 <span className="text-xs uppercase font-semibold tracking-widest text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/30">
-                  CAPITAL: UNDEFINED
+                  HOME STRONGHOLD: {selectedHouse.homeCity || selectedHouse.city}
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-medieval text-white tracking-wide">
                 House {selectedHouse.name}
               </h2>
               <p className="text-xs text-gray-400 mt-1 flex items-center justify-center sm:justify-start space-x-1.5 font-mono">
-                <i className="fa-solid fa-vault text-amber-400"></i>
-                <span>Treasury: 0</span>
+                <i className="fa-solid fa-scroll text-amber-400"></i>
+                <span>Founding Voyage I Charter Lineage</span>
               </p>
             </div>
           </div>
@@ -70,32 +70,33 @@ export const HouseModal: React.FC = () => {
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8 space-y-6">
-          {/* New Container: Times Renounced & Consistent Streak Indicator */}
+          {/* Official Charter Trait Blueprint */}
           <div className="bg-cambria-950/70 p-4 rounded-xl border border-cambria-800 grid grid-cols-1 sm:grid-cols-2 gap-3.5 shadow-inner">
             <div className="flex items-center space-x-3.5 bg-cambria-900/70 p-3.5 rounded-lg border border-cambria-800/80">
               <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 flex-shrink-0 shadow-sm">
-                <i className="fa-solid fa-scroll text-sm"></i>
+                <i className="fa-solid fa-crown text-sm"></i>
               </div>
               <div>
                 <span className="text-[11px] text-gray-400 block font-medium uppercase tracking-wider">
-                  Times Renounced
+                  Viceroy Bluebloods
                 </span>
-                <span className="text-base font-bold text-white font-mono">
-                  {selectedHouse.timesRenounced ?? 0}
+                <span className="text-base font-bold text-amber-300 font-mono">
+                  {selectedHouse.viceroys ?? 64}{' '}
+                  <span className="text-xs text-gray-500 font-normal">/ 512 Total Supply</span>
                 </span>
               </div>
             </div>
 
             <div className="flex items-center space-x-3.5 bg-cambria-900/70 p-3.5 rounded-lg border border-cambria-800/80">
-              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 flex-shrink-0 shadow-sm">
-                <i className="fa-solid fa-fire text-sm"></i>
+              <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 flex-shrink-0 shadow-sm">
+                <i className="fa-solid fa-wand-magic-sparkles text-sm"></i>
               </div>
               <div>
                 <span className="text-[11px] text-gray-400 block font-medium uppercase tracking-wider">
-                  Consistent Streak
+                  Dominant Affinity
                 </span>
-                <span className="text-base font-bold text-amber-400 font-mono">
-                  {selectedHouse.consistentStreak ?? 0} Epochs
+                <span className="text-xs font-bold text-cyan-300 font-mono truncate block">
+                  {selectedHouse.primaryAffinity || 'Martial & Craft'}
                 </span>
               </div>
             </div>
@@ -106,21 +107,23 @@ export const HouseModal: React.FC = () => {
             <div className="bg-cambria-950 p-3.5 rounded-lg border border-cambria-800 flex flex-col justify-center">
               <span className="text-xs text-gray-400 block mb-1">Total Revealed</span>
               <span className="text-base font-bold text-white font-mono">
-                {(CHARTER_REVEALED_COUNTS[selectedHouse.id] ?? selectedHouse.totalRevealed ?? 0).toLocaleString()}
+                {(CHARTER_REVEALED_COUNTS[selectedHouse.id] ?? selectedHouse.totalRevealed ?? 0).toLocaleString()} / 4,096
               </span>
             </div>
             <div className="bg-cambria-950 p-3.5 rounded-lg border border-cambria-800 flex flex-col justify-center">
-              <span className="text-xs text-gray-400 block mb-1">Total Players</span>
-              <span className="text-xs sm:text-sm font-bold text-amber-300 font-mono tracking-tight uppercase">
-                NO DATA COLLECTED YET
+              <span className="text-xs text-gray-400 block mb-1">Viceroy Ratio</span>
+              <span className="text-sm font-bold text-amber-300 font-mono">
+                {(((selectedHouse.viceroys ?? 64) / 512) * 100).toFixed(1)}% Share
               </span>
             </div>
             <div className="bg-cambria-950 p-3.5 rounded-lg border border-cambria-800 flex flex-col justify-center">
-              <span className="text-xs text-gray-400 block mb-1">Registered Guilds</span>
-              <span className="text-base font-bold text-amber-400 font-mono uppercase">NONE</span>
+              <span className="text-xs text-gray-400 block mb-1">Historical Royalty</span>
+              <span className="text-sm font-bold text-gray-300 font-mono uppercase">
+                {selectedHouse.timesRenounced ? `${selectedHouse.timesRenounced} Epochs` : 'Challenger'}
+              </span>
             </div>
             <div className="bg-cambria-950 p-3.5 rounded-lg border border-cambria-800 flex flex-col justify-center">
-              <span className="text-xs text-gray-400 block mb-1">Accumulated Silver Burned</span>
+              <span className="text-xs text-gray-400 block mb-1">Crown Pool Silver</span>
               <span className="text-lg font-bold text-amber-400 font-mono">
                 {(selectedHouse.silver || 0).toLocaleString()}
               </span>

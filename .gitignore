@@ -29,6 +29,10 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Local tooling & scratch
+/.claude/
+/scratch/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

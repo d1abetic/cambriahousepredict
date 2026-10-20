@@ -5,7 +5,7 @@
 @layer base {
   body {
     background-color: #060911;
-    background-image: linear-gradient(to bottom, rgba(6, 9, 17, 0.4) 0%, rgba(6, 9, 17, 0.25) 50%, rgba(6, 9, 17, 0.5) 100%), url('/images/predictbg.png');
+    background-image: linear-gradient(to bottom, rgba(6, 9, 17, 0.2) 0%, rgba(6, 9, 17, 0.1) 50%, rgba(6, 9, 17, 0.3) 100%), url('/images/ui/no-characters-animated-(with-shader).gif');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
@@ -14,8 +14,17 @@
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
   }
-  h1, h2, h3, .font-medieval {
+
+  h1,
+  h2,
+  h3,
+  .font-medieval {
     font-family: 'Cinzel', serif;
+  }
+
+  .font-arcade,
+  .font-lilita {
+    font-family: 'Lilita One', cursive, sans-serif;
   }
 }
 
@@ -50,14 +59,38 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0b0f19;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #1e2942;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #f59e0b;
 }
 
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}

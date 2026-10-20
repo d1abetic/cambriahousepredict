@@ -23,14 +23,14 @@ interface ChainBanner {
 //   6: Bloodstone
 //   7: Thornhill (Angle B - top right)
 const LOOP_HOUSES: ChainBanner[] = [
-  { id: 'warwick', name: 'Warwick', img: '/images/chained/warwick.png', color: 'from-amber-600 to-amber-900', angleLabel: 'Angle A', angleSubtitle: 'Warwick' },
-  { id: 'montblanc', name: 'Montblanc', img: '/images/chained/montblanc.png', color: 'from-blue-600 to-indigo-900', angleSubtitle: 'Montblanc' },
-  { id: 'dover', name: 'Dover', img: '/images/chained/dover.png', color: 'from-cyan-600 to-blue-950', angleSubtitle: 'Dover' },
-  { id: 'eyras', name: 'Eyras', img: '/images/chained/eyras.png', color: 'from-emerald-600 to-teal-950', angleLabel: 'Angle C', angleSubtitle: 'Eyras' },
-  { id: 'blackfort', name: 'Blackfort', img: '/images/chained/blackfort.png', color: 'from-stone-700 to-zinc-950', angleLabel: 'Angle D', angleSubtitle: 'Blackfort' },
-  { id: 'armagnac', name: 'Armagnac', img: '/images/chained/armagnac.png', color: 'from-amber-500 to-orange-800', angleSubtitle: 'Armagnac' },
-  { id: 'bloodstone', name: 'Bloodstone', img: '/images/chained/bloodstone.png', color: 'from-red-600 to-rose-950', angleSubtitle: 'Bloodstone' },
-  { id: 'thornhill', name: 'Thornhill', img: '/images/chained/thornhill.png', color: 'from-emerald-700 to-lime-950', angleLabel: 'Angle B', angleSubtitle: 'Thornhill' },
+  { id: 'warwick', name: 'Warwick', img: '/images/chained/banners/warwick.png', color: 'from-amber-600 to-amber-900', angleLabel: 'Angle A', angleSubtitle: 'Warwick' },
+  { id: 'montblanc', name: 'Montblanc', img: '/images/chained/banners/montblanc.png', color: 'from-blue-600 to-indigo-900', angleSubtitle: 'Montblanc' },
+  { id: 'dover', name: 'Dover', img: '/images/chained/banners/dover.png', color: 'from-cyan-600 to-blue-950', angleSubtitle: 'Dover' },
+  { id: 'eyras', name: 'Eyras', img: '/images/chained/banners/eyras.png', color: 'from-emerald-600 to-teal-950', angleLabel: 'Angle C', angleSubtitle: 'Eyras' },
+  { id: 'blackfort', name: 'Blackfort', img: '/images/chained/banners/blackfort.png', color: 'from-stone-700 to-zinc-950', angleLabel: 'Angle D', angleSubtitle: 'Blackfort' },
+  { id: 'armagnac', name: 'Armagnac', img: '/images/chained/banners/armagnac.png', color: 'from-amber-500 to-orange-800', angleSubtitle: 'Armagnac' },
+  { id: 'bloodstone', name: 'Bloodstone', img: '/images/chained/banners/bloodstone.png', color: 'from-red-600 to-rose-950', angleSubtitle: 'Bloodstone' },
+  { id: 'thornhill', name: 'Thornhill', img: '/images/chained/banners/thornhill.png', color: 'from-emerald-700 to-lime-950', angleLabel: 'Angle B', angleSubtitle: 'Thornhill' },
 ];
 
 export const AnimatedChainedBackground: React.FC = () => {
@@ -42,13 +42,15 @@ export const AnimatedChainedBackground: React.FC = () => {
   const currentOffsetRef = useRef<number>(0);
   const animFrameIdRef = useRef<number | null>(null);
 
-  // Viewport dimensions
+  // Viewport dimensions & desktop breakpoint
   const [viewportHeight, setViewportHeight] = useState<number>(850);
+  const [isDesktop, setIsDesktop] = useState<boolean>(true);
 
   // Handle window resize
   useEffect(() => {
     const updateSize = () => {
       setViewportHeight(window.innerHeight || 850);
+      setIsDesktop(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
     };
     updateSize();
     window.addEventListener('resize', updateSize);
@@ -107,8 +109,8 @@ export const AnimatedChainedBackground: React.FC = () => {
   }, []);
 
   // Slot calculations: 4 banners fit vertically in viewport
-  // Start below the sticky header (height 80px + padding)
-  const topPadding = 92;
+  // Start below the sticky header
+  const topPadding = 84;
   const availableHeight = Math.max(500, viewportHeight - topPadding - 36);
   const slotSpacing = availableHeight / 3.4;
 
@@ -126,31 +128,29 @@ export const AnimatedChainedBackground: React.FC = () => {
       className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden"
       aria-hidden="true"
     >
-      {/* 1. Underlying Castle Artwork with Vivid Golden Lighting */}
+      {/* 1. Underlying Animated Artwork with Canyon Sunset Shader */}
       <div
-        className="absolute inset-0 bg-top bg-no-repeat bg-cover transition-opacity duration-700 ease-in-out opacity-90 sm:opacity-95"
+        className="absolute inset-0 bg-top bg-no-repeat bg-cover transition-opacity duration-700 ease-in-out opacity-100"
         style={{
-          backgroundImage: "url('/images/predictbg.png')",
+          backgroundImage: "url('/images/ui/no-characters-animated-(with-shader).gif')",
           backgroundAttachment: 'fixed',
         }}
       />
 
-      {/* 2. Soft Balanced Atmosphere Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/55 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(6,9,17,0.4)_100%)] pointer-events-none" />
+      {/* 2. Soft subtle atmosphere - clear view of animated canyon background */}
+      <div className="absolute inset-0 bg-black/10 pointer-events-none" />
 
-      {/* 3. Continuous Full-Height Moving Anchor Chains (Rolling with Scroll) */}
+      {/* 3. Continuous Full-Height Moving Steel Chains (Rolling with Scroll) */}
       {/* Left Top-to-Bottom Chain: moves downward with scroll */}
       <div
         className="absolute top-0 bottom-0 w-20 sm:w-24 md:w-28 pointer-events-none z-10"
         style={{
-          left: 'clamp(8px, 2.5vw, 42px)',
-          backgroundImage: "url('/images/chained/chain_left.png')",
+          left: isDesktop ? '242px' : 'clamp(8px, 2.5vw, 42px)',
+          backgroundImage: "url('/images/chained/steel_chain.svg')",
           backgroundRepeat: 'repeat-y',
           backgroundSize: '100% auto',
           backgroundPositionY: `${leftChainOffsetY}px`,
-          imageRendering: 'pixelated',
-          opacity: 0.85,
+          filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.65))',
         }}
       />
 
@@ -159,12 +159,11 @@ export const AnimatedChainedBackground: React.FC = () => {
         className="absolute top-0 bottom-0 w-20 sm:w-24 md:w-28 pointer-events-none z-10"
         style={{
           right: 'clamp(8px, 2.5vw, 42px)',
-          backgroundImage: "url('/images/chained/chain_right.png')",
+          backgroundImage: "url('/images/chained/steel_chain.svg')",
           backgroundRepeat: 'repeat-y',
           backgroundSize: '100% auto',
           backgroundPositionY: `${rightChainOffsetY}px`,
-          imageRendering: 'pixelated',
-          opacity: 0.85,
+          filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.65))',
         }}
       />
 
@@ -191,15 +190,15 @@ export const AnimatedChainedBackground: React.FC = () => {
           if (s < 3.5) {
             // First half: Angle C (Eyras) reaches bottom edge and slowly disappears
             isLeft = true;
-            const t = (s - 3.0) / 0.5; // [0, 1]
-            p = 3.0 + t * 0.7; // moves downward past bottom edge
+            const t = (s - 3.0) / 0.5;
+            p = 3.0 + t * 0.7;
             opacity = Math.max(0, 1 - t);
             scale = 1 - t * 0.12;
           } else {
             // Second half: Reappears at bottom edge of Angle D (Blackfort) moving upward
             isLeft = false;
-            const t = (s - 3.5) / 0.5; // [0, 1]
-            p = 3.0 + (1 - t) * 0.7; // enters from bottom edge and moves up to slot 3
+            const t = (s - 3.5) / 0.5;
+            p = 3.0 + (1 - t) * 0.7;
             opacity = Math.min(1, t);
             scale = 0.88 + t * 0.12;
           }
@@ -215,15 +214,15 @@ export const AnimatedChainedBackground: React.FC = () => {
           if (s < 7.5) {
             // First half: Angle B (Thornhill) reaches top edge and slowly disappears
             isLeft = false;
-            const t = (s - 7.0) / 0.5; // [0, 1]
-            p = 0.0 - t * 0.7; // moves upward past top edge
+            const t = (s - 7.0) / 0.5;
+            p = 0.0 - t * 0.7;
             opacity = Math.max(0, 1 - t);
             scale = 1 - t * 0.12;
           } else {
             // Second half: Reappears at top edge of Angle A (Warwick) moving downward
             isLeft = true;
-            const t = (s - 7.5) / 0.5; // [0, 1]
-            p = 0.0 - (1 - t) * 0.7; // enters from top edge and moves down to slot 0
+            const t = (s - 7.5) / 0.5;
+            p = 0.0 - (1 - t) * 0.7;
             opacity = Math.min(1, t);
             scale = 0.88 + t * 0.12;
           }
@@ -238,8 +237,8 @@ export const AnimatedChainedBackground: React.FC = () => {
             onClick={() => openHouseModal(house.id)}
             style={{
               top: `${topPx}px`,
-              left: isLeft ? `clamp(8px, 2.5vw, 42px)` : 'auto',
-              right: !isLeft ? `clamp(8px, 2.5vw, 42px)` : 'auto',
+              left: isLeft ? (isDesktop ? '242px' : 'clamp(8px, 2.5vw, 42px)') : 'auto',
+              right: !isLeft ? 'clamp(8px, 2.5vw, 42px)' : 'auto',
               opacity: Math.max(0, Math.min(1, opacity)),
               transform: `scale(${scale})`,
               transition: 'opacity 0.06s linear, transform 0.06s ease-out',

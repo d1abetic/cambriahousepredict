@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import AdminOverview from '@/components/AdminOverview';
-import AdminLoginModal from '@/components/AdminLoginModal';
+import AdminLoginModal, { AdminProfile } from '@/components/AdminLoginModal';
 import HouseModal from '@/components/HouseModal';
 
 export default function PredictAdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [activeProfile, setActiveProfile] = useState<AdminProfile | undefined>(undefined);
 
   return (
     <>
       <Header currentView="admin" />
 
       {/* Main Container */}
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col justify-center">
+      <main className="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:pl-[128px] lg:pr-[128px] pt-20 pb-12 w-full flex flex-col justify-center">
         {isAuthenticated ? (
-          <AdminOverview onLockConsole={() => setIsAuthenticated(false)} />
+          <AdminOverview
+            adminProfile={activeProfile}
+            onLockConsole={() => {
+              setIsAuthenticated(false);
+              setActiveProfile(undefined);
+            }}
+          />
         ) : (
           <div className="flex items-center justify-center min-h-[55vh] py-6 w-full">
-            <AdminLoginModal onLoginSuccess={() => setIsAuthenticated(true)} />
+            <AdminLoginModal
+              onLoginSuccess={(profile) => {
+                setActiveProfile(profile);
+                setIsAuthenticated(true);
+              }}
+            />
           </div>
         )}
       </main>
